@@ -11,7 +11,9 @@ npm install react-shallow-testutils
 
 ## React Versions
 
-If you're using React 0.13 then stick to `0.4.0` as `0.5.0` and onwards will support React 0.14.
+If you're using React 0.13 then stick to `0.4.0`
+If you're using React 0.14 then stick to `0.5.0`
+`0.6.0` and onwards will support React 15.5.0.
 
 ## Usage
 
@@ -40,7 +42,7 @@ boolean isComponentOfType(ReactElement element, function componentClass | string
 
 ```javascript
 import React from 'react';
-import ReactTestUtils from 'react-addons-test-utils';
+import {createRenderer} from 'react-test-renderer/shallow';
 import {isComponentOfType} from 'react-shallow-testutils';
 
 function MyOtherComponent() {
@@ -51,7 +53,7 @@ function MyComponent() {
   return <OtherComponent />;
 }
 
-const renderer = ReactTestUtils.createRenderer();
+const renderer = createRenderer();
 
 const tree1 = renderer.render(<MyComponent />);
 expect(isComponentOfType(tree1, OtherComponent)).toBe(true);
@@ -69,14 +71,14 @@ boolean isDOMComponent(ReactElement element)
 
 ```javascript
 import React from 'react';
-import ReactTestUtils from 'react-addons-test-utils';
+import {createRenderer} from 'react-test-renderer/shallow';
 import {isDOMComponent} from 'react-shallow-testutils';
 
 function MyComponent() {
   return <div />;
 }
 
-const renderer = ReactTestUtils.createRenderer();
+const renderer = createRenderer();
 
 const tree = renderer.render(<MyComponent />);
 expect(isDOMComponent(tree)).toBe(true);
@@ -91,7 +93,7 @@ array findAll(ReactElement tree, function test)
 
 ```javascript
 import React from 'react';
-import ReactTestUtils from 'react-addons-test-utils';
+import {createRenderer} from 'react-test-renderer/shallow';
 import {findAll} from 'react-shallow-testutils';
 
 function MyComponent() {
@@ -104,7 +106,7 @@ function MyComponent() {
   );
 }
 
-const renderer = ReactTestUtils.createRenderer();
+const renderer = createRenderer();
 
 const tree = renderer.render(<MyComponent />);
 const spans = findAll(tree, (element) => element.type === 'span');
@@ -121,7 +123,7 @@ array findAllWithType(ReactElement tree, function componentClass | string tagNam
 
 ```javascript
 import React from 'react';
-import ReactTestUtils from 'react-addons-test-utils';
+import {createRenderer} from 'react-test-renderer/shallow'
 import {findAllWithType} from 'react-shallow-testutils';
 
 function MyOtherComponent() {
@@ -138,7 +140,7 @@ function MyComponent() {
   );
 }
 
-const renderer = ReactTestUtils.createRenderer();
+const renderer = createRenderer();
 
 const tree = renderer.render(<MyComponent />);
 expect(findAllWithType(tree, MyOtherComponent).length).toBe(1);
@@ -155,7 +157,7 @@ ReactElement findWithType(ReactElement tree, function componentClass | string ta
 
 ```javascript
 import React from 'react';
-import ReactTestUtils from 'react-addons-test-utils';
+import {createRenderer} from 'react-test-renderer/shallow'
 import {findWithType} from 'react-shallow-testutils';
 
 function MyOtherComponent() {
@@ -172,7 +174,7 @@ function MyComponent() {
   );
 }
 
-const renderer = ReactTestUtils.createRenderer();
+const renderer = createRenderer();
 
 const tree = renderer.render(<MyComponent />);
 expect(findWithType(tree, MyOtherComponent)).not.toThrow();
@@ -190,7 +192,7 @@ array findAllWithClass(ReactElement tree, string className)
 
 ```javascript
 import React from 'react';
-import ReactTestUtils from 'react-addons-test-utils';
+import {createRenderer} from 'react-test-renderer/shallow'
 import {findAllWithClass} from 'react-shallow-testutils';
 
 function MyOtherComponent() {
@@ -207,7 +209,7 @@ function MyComponent() {
   );
 }
 
-const renderer = ReactTestUtils.createRenderer();
+const renderer = createRenderer();
 
 const tree = renderer.render(<MyComponent />);
 expect(findAllWithClass(tree, 'my-div').length).toBe(0);
@@ -225,7 +227,7 @@ ReactElement findWithClass(ReactElement tree, string className)
 
 ```javascript
 import React from 'react';
-import ReactTestUtils from 'react-addons-test-utils';
+import {createRenderer} from 'react-test-renderer/shallow'
 import {findWithClass} from 'react-shallow-testutils';
 
 function MyOtherComponent() {
@@ -242,7 +244,7 @@ function MyComponent() {
   );
 }
 
-const renderer = ReactTestUtils.createRenderer();
+const renderer = createRenderer();
 
 const tree = renderer.render(<MyComponent />);
 expect(findWithClass(tree, 'my-div')).not.toThrow();
@@ -258,7 +260,7 @@ ReactElement findWithRef(ReactElement tree, string ref)
 
 ```javascript
 import React from 'react';
-import ReactTestUtils from 'react-addons-test-utils';
+import {createRenderer} from 'react-test-renderer/shallow'
 import {findWithRef} from 'react-shallow-testutils';
 
 function MyComponent() {
@@ -271,7 +273,7 @@ function MyComponent() {
   );
 }
 
-const renderer = ReactTestUtils.createRenderer();
+const renderer = createRenderer();
 
 const tree = renderer.render(<MyComponent />);
 expect(findWithRef(tree, 'div-ref').props.className).toBe('div-ref-class');
